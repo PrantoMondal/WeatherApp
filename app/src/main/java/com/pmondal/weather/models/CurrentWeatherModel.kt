@@ -13,7 +13,7 @@ data class CurrentModel(
     @SerializedName("coord")
     val coord: Coord,
     @SerializedName("dt")
-    val dt: Int,
+    val dt: Long,
     @SerializedName("id")
     val id: Int,
     @SerializedName("main")
@@ -64,9 +64,9 @@ data class CurrentModel(
         @SerializedName("id")
         val id: Int,
         @SerializedName("sunrise")
-        val sunrise: Int,
+        val sunrise: Long,
         @SerializedName("sunset")
-        val sunset: Int,
+        val sunset: Long,
         @SerializedName("type")
         val type: Int
     )
