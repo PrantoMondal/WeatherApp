@@ -1,6 +1,7 @@
 package com.pmondal.weather
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,14 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         weatherViewModel.locationLiveData.observe(viewLifecycleOwner){
-            Toast.makeText(requireActivity(), "${it.latitude},${it.longitude}", Toast.LENGTH_SHORT).show()
+            weatherViewModel.fetchData()
+            //Toast.makeText(requireActivity(), "${it.latitude},${it.longitude}", Toast.LENGTH_SHORT).show()
+        }
+        weatherViewModel.currentLiveData.observe(viewLifecycleOwner){
+            Log.d("WeatherFragment", "${it.main.temp}")
+        }
+        weatherViewModel.forecastLiveData.observe(viewLifecycleOwner){
+            Log.d("WeatherFragment", "${it.list.size}")
         }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_weather, container, false)

@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     val location = it.result
-                    weatherViewModel.setNewLocation(location)
+                    location?.let {
+                        weatherViewModel.setNewLocation(location)
+                    }
 
                 }
             }
