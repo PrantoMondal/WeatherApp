@@ -1,14 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WeatherFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:context=".WeatherFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:background="@drawable/bg"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_gravity="right"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/white"
+                app:setDateTime="@{current.dt}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="May 10, 2022, 11:57" />
+
+            <TextView
+                android:id="@+id/addressTV"
+                android:layout_gravity="right"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:text="@{current.name+`,`+current.sys.country}"
+                tools:text="Dhaka, BD"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding=""
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/iconIV"
+
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    app:setWeatherIcon="@{current.weather[0].icon}"
+                    android:src="@mipmap/ic_launcher_round"/>
+                <TextView
+                    android:id="@+id/tempTV"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextAppearance.AppCompat.Headline"
+                    android:textSize="80sp"
+                    android:text="@{current.main.temp+`\u00B0`}"
+                    tools:text="35\u00B0 C"
+
+                    android:textStyle="italic"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/feelsLikeTV"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{`feels like:`+current.main.feelsLike+`\u00B0`}"
+                android:textColor="#FFFFFF"
+                tools:text="feels like: 40\u00B0 C" />
+            <TextView
+                android:id="@+id/conditionTV"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:text="@{current.weather[0].description}"
+                tools:text="Overcast"/>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Humidity: "/>
+                    <TextView
+                        android:id="@+id/humidityTV"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:text="@{String.valueOf(current.main.humidity)}"
+                        tools:text="74"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_marginStart="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Pressure: "/>
+                    <TextView
+                        android:id="@+id/pressureTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:text="@{String.valueOf(current.main.pressure)}"
+                        tools:text="1008"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/bg2"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/forecastRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>
