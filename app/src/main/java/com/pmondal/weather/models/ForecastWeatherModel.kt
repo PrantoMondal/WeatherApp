@@ -11,7 +11,7 @@ data class ForecastModel(
     @SerializedName("cod")
     val cod: String,
     @SerializedName("list")
-    val list: List<ForecastList>,
+    val list: List<ForecastItem>,
     @SerializedName("message")
     val message: Int
 ) {
@@ -41,7 +41,7 @@ data class ForecastModel(
         )
     }
 
-    data class ForecastList(
+    data class ForecastItem(
         @SerializedName("clouds")
         val clouds: Clouds,
         @SerializedName("dt")

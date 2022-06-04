@@ -62,8 +62,8 @@
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.AppCompat.Headline"
                     android:textSize="80sp"
-                    android:text="@{current.main.temp+`\u00B0`}"
-                    tools:text="35\u00B0 C"
+                    android:text="@{current.main.temp+`\u00B0` +'C'}"
+                    tools:text="35\u00B0"
 
                     android:textStyle="italic"/>
             </LinearLayout>
