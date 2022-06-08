@@ -10,9 +10,8 @@ import com.pmondal.weather.icon_prefix
 import com.pmondal.weather.icon_suffix
 
 @BindingAdapter("app:setWeatherIcon")
-fun setIcon(imageView: ImageView,icon: String?){
-    Log.d("iconTest", "$icon")
-    icon?.let{
+fun setIcon(imageView: ImageView, icon: String?) {
+    icon?.let {
         val url = "$icon_prefix$icon$icon_suffix"
         Glide
             .with(imageView.context)
@@ -21,14 +20,13 @@ fun setIcon(imageView: ImageView,icon: String?){
     }
 
 }
-@BindingAdapter("app:setDateTime")
-fun setDateTime(textView: TextView,dt:Long){
-    textView.text = getFormattedDate(dt, "MMM dd, yyyy HH:mm")
 
+@BindingAdapter("app:setDateTime")
+fun setDateTime(textView: TextView, dt: Long) {
+    textView.text = getFormattedDate(dt, "MMM dd, yyyy HH:mm")
 }
 
 @BindingAdapter("app:setWeekdayTime")
-fun setWeekdayTime(textView: TextView,dt:Long){
+fun setWeekdayTime(textView: TextView, dt: Long) {
     textView.text = getFormattedDate(dt, "EEE, HH:mm")
-
 }

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.pmondal.weather.adapter.ForecastAdapter
 import com.pmondal.weather.databinding.FragmentWeatherBinding
 import com.pmondal.weather.viewmodels.WeatherViewModel
 
@@ -22,6 +24,13 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWeatherBinding.inflate(inflater,container,false)
+        val adapter = ForecastAdapter()
+        binding.forecastRV.layoutManager =
+            LinearLayoutManager(requireActivity()).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
+        binding.forecastRV.adapter = adapter
+
         weatherViewModel.locationLiveData.observe(viewLifecycleOwner){
             weatherViewModel.fetchData()
             //Toast.makeText(requireActivity(), "${it.latitude},${it.longitude}", Toast.LENGTH_SHORT).show()
@@ -31,7 +40,8 @@ class WeatherFragment : Fragment() {
             binding.current = it
         }
         weatherViewModel.forecastLiveData.observe(viewLifecycleOwner){
-            Log.d("WeatherFragment", "${it.list.size}")
+            Log.d("WeatherFragmentFC", "${it.list.size}")
+            adapter.submitList(it.list)
         }
         // Inflate the layout for this fragment
         return binding.root

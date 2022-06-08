@@ -3,6 +3,9 @@ package com.pmondal.weather.models
 import com.google.gson.annotations.SerializedName
 
 
+
+
+
 data class CurrentModel(
     @SerializedName("base")
     val base: String,

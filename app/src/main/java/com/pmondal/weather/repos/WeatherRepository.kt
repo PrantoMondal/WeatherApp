@@ -17,7 +17,7 @@ class WeatherRepository {
 
     suspend fun fetchForecastData(location: Location): ForecastModel {
         val endUrl =
-            "weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=$weather_api_key"
+            "forecast?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=$weather_api_key"
 
         return NetworkService.weatherServiceApi
             .getForecastWeather(endUrl)
