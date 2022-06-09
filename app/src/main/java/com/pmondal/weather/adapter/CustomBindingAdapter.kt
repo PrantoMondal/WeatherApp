@@ -5,9 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.pmondal.weather.getFormattedDate
-import com.pmondal.weather.icon_prefix
-import com.pmondal.weather.icon_suffix
+import com.pmondal.weather.*
 
 @BindingAdapter("app:setWeatherIcon")
 fun setIcon(imageView: ImageView, icon: String?) {
@@ -29,4 +27,14 @@ fun setDateTime(textView: TextView, dt: Long) {
 @BindingAdapter("app:setWeekdayTime")
 fun setWeekdayTime(textView: TextView, dt: Long) {
     textView.text = getFormattedDate(dt, "EEE, HH:mm")
+}
+
+@BindingAdapter("app:setSunriseTime")
+fun setSunriseTime(textView: TextView, sunrise: Long) {
+    textView.text = getFormattedTime1(sunrise, "HH:mm")
+}
+
+@BindingAdapter("app:setSunsetTime")
+fun setSunsetTime(textView: TextView, sunset: Long) {
+    textView.text = getFormattedTime2(sunset, "HH:mm")
 }

@@ -86,12 +86,7 @@
                 style="@style/TextAppearance.AppCompat.Body2"
                 android:text="@{current.weather[0].description}"
                 tools:text="Overcast"/>
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+
                 <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -111,15 +106,9 @@
                         style="@style/TextAppearance.AppCompat.Body2"
                         android:text="@{String.valueOf(current.main.humidity)}"
                         tools:text="74"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
+
                     <TextView
-                        android:layout_marginStart="5dp"
+                        android:layout_marginStart="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
@@ -133,6 +122,41 @@
                         android:text="@{String.valueOf(current.main.pressure)}"
                         tools:text="1008"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Sunrise: "/>
+                    <TextView
+                        android:id="@+id/sunriseTV"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_height="wrap_content"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        app:setSunriseTime="@{current.sys.sunrise}"
+                        tools:text="06.00"/>
+
+                    <TextView
+                        android:layout_marginStart="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Sunset: "/>
+                    <TextView
+                        android:id="@+id/sunsetTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        app:setSunsetTime="@{current.sys.sunset}"
+                        tools:text="18.08"/>
 
             </LinearLayout>
 

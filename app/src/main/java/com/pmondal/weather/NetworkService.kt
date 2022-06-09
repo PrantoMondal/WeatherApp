@@ -19,6 +19,12 @@ const val icon_suffix = "@2x.png"
 fun getFormattedDate(dt:Long,pattern: String): String {
         return SimpleDateFormat(pattern).format(Date(dt*1000))
 }
+fun getFormattedTime1(sunrise:Long,pattern: String): String {
+        return SimpleDateFormat(pattern).format(Date(sunrise*1000))
+}
+fun getFormattedTime2(sunset:Long,pattern: String): String {
+        return SimpleDateFormat(pattern).format(Date(sunset*1000))
+}
 
 val retrofit = Retrofit.Builder()
         .baseUrl(base_url)
