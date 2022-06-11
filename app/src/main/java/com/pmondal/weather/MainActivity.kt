@@ -12,7 +12,7 @@ import com.pmondal.weather.viewmodels.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
     private val weatherViewModel:WeatherViewModel by viewModels()
-    private lateinit var locationProvider:FusedLocationProviderClient
+
 
     val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -35,24 +35,15 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        locationProvider = FusedLocationProviderClient(this)
         locationPermissionRequest.launch(arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION))
 
     }
 
-    @SuppressLint("MissingPermission")
     private fun detectUserLocation(){
-        locationProvider.lastLocation
-            .addOnCompleteListener {
-                if(it.isSuccessful){
-                    val location = it.result
-                    location?.let {
-                        weatherViewModel.setNewLocation(location)
-                    }
-
-                }
-            }
+        getLocation(this){
+            weatherViewModel.setNewLocation(it)
+        }
     }
 }

@@ -46,6 +46,15 @@ class WeatherFragment : Fragment() {
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.item_location){
+            getLocation(requireContext()){
+                weatherViewModel.setNewLocation(it)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
 
     private fun convertQueryToLatLng(query: String) {

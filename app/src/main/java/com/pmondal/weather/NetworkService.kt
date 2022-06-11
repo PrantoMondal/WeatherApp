@@ -1,5 +1,9 @@
 package com.pmondal.weather
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Location
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.pmondal.weather.models.CurrentModel
 import com.pmondal.weather.models.ForecastModel
 import retrofit2.Retrofit
@@ -24,6 +28,21 @@ fun getFormattedTime1(sunrise:Long,pattern: String): String {
 }
 fun getFormattedTime2(sunset:Long,pattern: String): String {
         return SimpleDateFormat(pattern).format(Date(sunset*1000))
+}
+
+@SuppressLint("MissingPermission")
+fun getLocation(context : Context, callback: (Location)->Unit){
+        val locationProvider = FusedLocationProviderClient(context)
+        locationProvider.lastLocation
+                .addOnCompleteListener {
+                        if(it.isSuccessful){
+                                val location = it.result
+                                location?.let {
+                                        callback(it)
+                                }
+
+                        }
+                }
 }
 
 val retrofit = Retrofit.Builder()
