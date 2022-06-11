@@ -6,9 +6,9 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -27,29 +27,31 @@ class WeatherFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.weather_menu,menu)
+        inflater.inflate(R.menu.weather_menu, menu)
         val searchView = menu.findItem(R.id.item_search).actionView as SearchView
-        searchView.queryHint = "Search any city"
+        searchView.queryHint = "Search any City"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                p0?.let {
-                    convertQueryToLatLong(p0)
-
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    convertQueryToLatLng(query)
                 }
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(newText: String?): Boolean {
+
                 return true
             }
 
         })
     }
 
-    private fun convertQueryToLatLong(p0: String) {
+
+
+    private fun convertQueryToLatLng(query: String) {
         val geocoder = Geocoder(requireActivity())
-        val addressList : List<Address> = geocoder.getFromLocationName(p0,1)
-        if (addressList.isNotEmpty()){
+        val addressList: List<Address> = geocoder.getFromLocationName(query, 1)
+        if (addressList.isNotEmpty()) {
             val lat = addressList[0].latitude
             val lng = addressList[0].longitude
             val location = Location("").apply {
@@ -57,9 +59,7 @@ class WeatherFragment : Fragment() {
                 longitude = lng
             }
             weatherViewModel.setNewLocation(location)
-
-        }
-        else{
+        }else {
             Toast.makeText(requireActivity(), "Invalid city name", Toast.LENGTH_SHORT).show()
         }
     }
